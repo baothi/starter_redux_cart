@@ -2,8 +2,7 @@ import React from "react";
 // components
 import Navbar from "./components/Navbar";
 import CartContainer from "./components/CartContainer";
-// items
-import cartItems from "./cart-items";
+
 // redux stuff
 
 // store - stores data, think of state
@@ -16,14 +15,10 @@ import reducer from "./reducer";
 // don't mutate the state - redux build on IMMUTABILITY(copy)
 import { Provider } from "react-redux";
 // instial store
-const initialStore = {
-  cart:cartItems,
-  total:105,
-  amount:5
-}
+
 
 // store
-const store = createStore(reducer, initialStore);
+const store = createStore(reducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 function App() {
   // cart setup

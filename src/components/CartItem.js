@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { DECREASE, INCREASE, REMOVE , TOGGLE_AMOUNT} from "../actions";
+import { DECREASE, INCREASE, REMOVE , 
+         TOGGLE_AMOUNT, removeItem} from "../actions";
+
 const CartItem = ({
   id, 
   img, 
@@ -32,7 +34,7 @@ const CartItem = ({
         <p className="amount">{amount}</p>
         {/* decrease amount */}
         <button className="amount-btn" onClick={()=>{
-          if (amount = 1 ) {
+          if (amount === 1 ) {
             return remove()
           }
           else{
@@ -52,21 +54,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   // console.log(ownProps);
   const {id,amount} = ownProps;
   return {
-    remove: ()=> dispatch({
-          type: REMOVE, 
-          payload: {id}    
-        }),
-    increase: ()=> dispatch({
-          type: INCREASE, 
-          payload: {id,amount}
-        }),
-    decrease: ()=> dispatch({
-          type: DECREASE, 
-          payload: {id,amount}
-        }),
-    toggle:(toggle) => dispatch({type: TOGGLE_AMOUNT, 
-      payload:{id, toggle}})
-    };
+    remove: ()=> dispatch(removeItem(id)),
+    increase: ()=> dispatch({ type: INCREASE,  payload: {id} }),
+    decrease: ()=> dispatch({ type: DECREASE, payload: {id, amount} }),
+    toggle:(toggle) => dispatch({type: TOGGLE_AMOUNT,  payload:{id, toggle}})
+  };
 };
 
 export default connect(null,mapDispatchToProps) (CartItem);
